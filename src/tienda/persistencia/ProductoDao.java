@@ -1,6 +1,8 @@
 
 package tienda.persistencia;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import tienda.entidades.Producto;
 
 
@@ -43,6 +45,37 @@ public final class ProductoDao extends DAO{
         } catch (Exception e) {
             
             throw e;
+        }
+    }
+    
+    public Collection<Producto> buscarNombreProducto() throws Exception{
+        
+        try {
+            
+            String sql = "SELECT nombre FROM Producto";
+            
+            consultarBase(sql);
+            
+            Producto nombre = null;
+            Collection<Producto> productos = new ArrayList();
+            
+            while (resultado.next()) {
+                
+                nombre = new Producto();
+                nombre.setNombre(resultado.getString("nombre"));
+                productos.add(nombre);
+            }
+            
+            DesconectarBase();
+            
+            return productos;
+            
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            DesconectarBase();
+            throw new Exception ("Error de Sistema");
+            
         }
     }
 }

@@ -4,15 +4,16 @@ package tienda.servicios;
 import java.util.Scanner;
 import tienda.entidades.Fabricante;
 import tienda.entidades.Producto;
+import tienda.persistencia.FabricanteDao;
 import tienda.persistencia.ProductoDao;
 
 public class ServicioProducto {
     
     Producto producto = new Producto();
     Fabricante fabricante = new Fabricante();
-    ServicioFabricante sf = new ServicioFabricante();
     Scanner leer = new Scanner(System.in);
     ProductoDao pd = new ProductoDao();
+    FabricanteDao fd = new FabricanteDao();
     
     public void ingresar(){
         
@@ -31,6 +32,7 @@ public class ServicioProducto {
         switch (num) {
             case 1:
                 
+                System.out.println(pd.buscarNombreProducto());
             case 2:
                 
             case 3:
@@ -62,9 +64,36 @@ public class ServicioProducto {
                 
                 pd.ingresarProducto(producto);
             case 7:
-                sf.editar();
+                
+                System.out.println("Nombre del fabricante");
+                System.out.println("- ");
+                nom = leer.next();
+                fabricante.setNombre(nom);
+                
+                System.out.println("Código del fabricante");
+                System.out.println("- ");
+                cod = leer.nextInt();
+                fabricante.setCodigo(cod);
+                
+                fd.ingresarFabricante(fabricante);
             case 8:
                 
+                System.out.println("Ingrese el código del producto ha editar");
+                System.out.println("- ");
+                cod = leer.nextInt();
+                producto.setCodigo(cod);
+                
+                System.out.println("Nombre");
+                System.out.println("- ");
+                nom = leer.next();
+                producto.setNombre(nom);
+                
+                System.out.println("Precio");
+                System.out.println("- ");
+                pre = leer.nextDouble();
+                producto.setPrecio(pre);
+                
+                pd.modificarProducto(producto);
                default:
                    
                    
