@@ -78,4 +78,140 @@ public final class ProductoDao extends DAO{
             
         }
     }
+
+    
+    public Collection<Producto> buscarNombreyPrecioProducto() throws Exception{
+        
+        try {
+            
+            String sql = "SELECT nombre, precio FROM Producto";
+            
+            consultarBase(sql);
+            
+            Producto prod = null;
+            Collection<Producto> productos = new ArrayList();
+            
+            while (resultado.next()) {
+                
+                prod = new Producto();
+                prod.setPrecio(resultado.getDouble("precio"));
+                prod.setNombre(resultado.getString("nombre"));
+                productos.add(prod);
+            }
+            
+            DesconectarBase();
+            
+            return productos;
+            
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            DesconectarBase();
+            throw new Exception ("Error de Sistema");
+            
+        }
+    }
+     
+     
+    public Collection<Producto> buscarRangoPrecio() throws Exception{
+        
+        try {
+            
+            String sql = "SELECT precio,nombre FROM Producto WHERE precio >=120 AND precio<=202";
+            
+            consultarBase(sql);
+            
+            Producto prod = null;
+            Collection<Producto> productos = new ArrayList();
+            
+            while (resultado.next()) {
+                
+                prod = new Producto();
+                prod.setNombre(resultado.getString("nombre"));
+                prod.setPrecio(resultado.getDouble("precio"));
+
+                productos.add(prod);
+            }
+            
+            DesconectarBase();
+            
+            return productos;
+            
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            DesconectarBase();
+            throw new Exception ("Error de Sistema");
+            
+        }
+    }
+     
+     
+    public Collection<Producto> buscarPortatil() throws Exception{
+        
+        try {
+            
+            String sql = "SELECT * FROM Producto WHERE nombre LIKE '%Portátil%'";
+            
+            consultarBase(sql);
+            
+            Producto prod = null;
+            Collection<Producto> productos = new ArrayList();
+            
+            while (resultado.next()) {
+                
+                prod = new Producto();
+                prod.setPrecio(resultado.getDouble("precio"));
+                prod.setNombre(resultado.getString("nombre"));
+                prod.setCodigo(resultado.getInt("codigo"));
+                prod.setCodigoFabricante(resultado.getInt("codigo_fabricante"));
+                productos.add(prod);
+            }
+            
+            DesconectarBase();
+            
+            return productos;
+            
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            DesconectarBase();
+            throw new Exception ("Error de Sistema");
+            
+        }     
+    }     
+
+    
+    public Collection<Producto> buscarBarato() throws Exception{
+        
+        try {
+            
+            String sql = "SELECT nombre, min(precio) FROM Producto ";
+            
+            consultarBase(sql);
+            
+            Producto prod = null;
+            Collection<Producto> productos = new ArrayList();
+            
+            while (resultado.next()) {
+                
+                prod = new Producto();
+                prod.setPrecio(resultado.getDouble("min(precio)"));
+                prod.setNombre(resultado.getString("nombre"));
+
+                productos.add(prod);
+            }
+            
+            DesconectarBase();
+            
+            return productos;
+            
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            DesconectarBase();
+            throw new Exception ("Error de Sistema");
+            
+        }
+    }
 }

@@ -33,14 +33,23 @@ public class ServicioProducto {
             case 1:
                 
                 System.out.println(pd.buscarNombreProducto());
+                break;
             case 2:
                 
+                System.out.println(pd.buscarNombreyPrecioProducto());
+                break;
             case 3:
                 
+                System.out.println(pd.buscarRangoPrecio());
+                break;
             case 4:
                 
+                System.out.println(pd.buscarPortatil());
+                break;
             case 5:
                 
+                System.out.println(pd.buscarBarato());
+                break;
             case 6:
                 System.out.println("Nombre del producto");
                 System.out.print("- ");
@@ -63,6 +72,7 @@ public class ServicioProducto {
                 producto.setCodigoFabricante(codf);
                 
                 pd.ingresarProducto(producto);
+                break;
             case 7:
                 
                 System.out.println("Nombre del fabricante");
@@ -76,6 +86,7 @@ public class ServicioProducto {
                 fabricante.setCodigo(cod);
                 
                 fd.ingresarFabricante(fabricante);
+                break;
             case 8:
                 
                 System.out.println("Ingrese el código del producto ha editar");
@@ -94,6 +105,7 @@ public class ServicioProducto {
                 producto.setPrecio(pre);
                 
                 pd.modificarProducto(producto);
+                break;
                default:
                    
                    
